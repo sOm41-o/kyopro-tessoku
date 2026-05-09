@@ -1,14 +1,13 @@
 N, Q = map(int, input().split())
 A = list(map(int, input().split()))
-L = [ None ] * Q
-R = [ None ] * Q
-for j in range(Q):
-	L[j], R[j] = map(int, input().split())
- 
-S = [ None ] * (N + 1)
-S[0] = 0
-for i in range(N):
-	S[i + 1] = S[i] + A[i]
- 
-for j in range(Q):
-	print(S[R[j]] - S[L[j] - 1])
+
+ruiseki_A = [0]  # 累積和管理用のlist。0を入れることで0日目に対処
+total = 0
+
+for a in A:
+    total += a
+    ruiseki_A.append(total)
+
+for _ in range(Q):
+    l, r = map(int, input().split())
+    print(ruiseki_A[r] - ruiseki_A[l - 1])
