@@ -1,23 +1,14 @@
-# 入力
 T = int(input())
 N = int(input())
-L = [ None ] * N
-R = [ None ] * N
-for i in range(N):
-	L[i], R[i] = map(int, input().split())
 
-# "前の時刻との差" に加算
-B = [ 0 ] * (T + 1)
-for i in range(N):
-	B[L[i]] += 1
-	B[R[i]] -= 1
+attendances = [0]*(T + 1)
+for _ in range(N):
+    l, r = map(int, input().split())
+    attendances[l] += 1
+    attendances[r] -= 1  # R + 0.5にはもういない→r + 1ではなく、just"r"で引き算！
 
-# 累積和をとる
-Answer = [ None ] * (T + 1)
-Answer[0] = B[0]
-for d in range(1, T+1):
-	Answer[d] = Answer[d-1] + B[d]
+total = 0
 
-# 出力
-for d in range(T):
-	print(Answer[d])
+for i in range(T):
+    total += attendances[i]
+    print(total)
